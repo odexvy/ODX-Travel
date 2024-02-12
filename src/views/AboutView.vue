@@ -1,13 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main class="main">
+  <div class="aboutContainer">
     <h1>This is an about page</h1>
-  </main>
+  </div>
 </template>
 
 <style>
-.main {
+.aboutContainer {
   height: 100vh;
   padding-top: 50px;
 }
