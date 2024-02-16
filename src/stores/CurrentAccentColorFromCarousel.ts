@@ -4,8 +4,8 @@ import { defineStore } from 'pinia'
 export const useCurrentAccentColorFromCarouselStore = defineStore(
   'currentAccentColorFromCarousel',
   () => {
-    const color = ref('#fff')
+    const carouselColor = { color: ref('#db3b1f'), textColor: ref('#fff') }
 
-    return { color }
+    return { carouselColor }
   }
 )

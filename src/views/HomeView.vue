@@ -13,18 +13,32 @@ const getImageUrl = (name: string, ext: 'jpg' | 'png') => {
   return new URL(`../assets/images/${name}.${ext}`, import.meta.url).href
 }
 
-const scrollTo = (view: any) => {
-  console.log(view)
-  contentSection.value.scrollIntoView({ behavior: 'smooth' })
+const scrollTo = () => {
+  if (window.scrollY === 0) {
+    contentSection.value.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }
+}
+
+const isOnTop = () => {
+  console.log(window.scrollY)
+  return window.scrollY === 0
 }
 
 const handleCarouselChange = (index: any) => {
-  currentAccentColorFromCarousel.color = data[index].color
+  currentAccentColorFromCarousel.carouselColor.color = data[index].color
+  currentAccentColorFromCarousel.carouselColor.textColor = data[index].textColor
 }
 </script>
 
 <template>
   <v-carousel
+    ref="carouselSection"
     :show-arrows="false"
     cycle
     hide-delimiters
@@ -61,20 +75,20 @@ const handleCarouselChange = (index: any) => {
         <div class="discoverButton">
           <TextButton text="Découvrir" :text-color="toto.textColor" :color="toto.color" />
         </div>
-        <div class="goDownButton">
-          <IconButton
-            @click="scrollTo(contentSection)"
-            iconName="arrow-down-thin"
-            :icon-color="toto.textColor"
-            :color="toto.color"
-          />
-        </div>
       </v-row>
     </v-carousel-item>
   </v-carousel>
+  <div class="goDownButton">
+    <IconButton
+      @click="scrollTo()"
+      :iconName="isOnTop() ? 'arrow-down-thin' : 'arrow-up-thin'"
+      :icon-color="currentAccentColorFromCarousel.carouselColor.textColor"
+      :color="currentAccentColorFromCarousel.carouselColor.color"
+    />
+  </div>
   <div class="content" ref="contentSection">
-    <div class="test">Nos voyages</div>
-    <div class="test">Qui sommes nous</div>
+    <h1 class="test">Nos voyages</h1>
+    <h1 class="test">Qui sommes nous</h1>
   </div>
 </template>
 
@@ -83,13 +97,11 @@ const handleCarouselChange = (index: any) => {
   display: flex;
   height: 90vh;
   width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 1240px;
 }
 .test {
-  padding: 8px;
-  max-width: 1240px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
 }
 .discoverButton {
   margin-top: 24px;
@@ -98,5 +110,6 @@ const handleCarouselChange = (index: any) => {
   position: absolute;
   bottom: 0;
   margin-bottom: 24px;
+  z-index: 2000;
 }
 </style>

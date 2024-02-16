@@ -23,19 +23,6 @@ const { svgColor, width, height } = defineProps(['svgColor', 'height', 'width'])
     :height="height"
     :width="width"
   >
-    <!-- <defs>
-      <style>
-        .cls-1 {
-          :fill="props.svgcolor";
-        }
-        .cls-2 {
-          fill: #231f20;
-        }
-        .cls-3 {
-          fill: #fff;
-        }
-      </style>
-    </defs> -->
     <rect class="cls-1" x="17.75" y="18.25" width="297.5" height="297.5" />
     <rect class="cls-2" width="297.5" height="297.5" />
     <path
