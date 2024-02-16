@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import ODXLogo from './components/icons/ODXLogo.vue'
+import ODXLogo from './components/ODXLogo.vue'
+import { useCurrentAccentColorFromCarouselStore } from './stores/CurrentAccentColorFromCarousel'
+
+const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
 </script>
 
 <template>
   <div class="appContainer">
     <header>
-      <ODXLogo svgColor="#1ad" width="72" height="72" />
+      <ODXLogo :svgColor="currentAccentColorFromCarousel.color" width="72" height="72" />
       <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="54" height="54" /> -->
       <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
