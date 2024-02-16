@@ -3,16 +3,22 @@ import TextButton from '@/components/TextButton.vue'
 import IconButton from '@/components/IconButton.vue'
 import { travelDatas } from '../travelDatas.ts'
 import { useCurrentAccentColorFromCarouselStore } from '../stores/CurrentAccentColorFromCarousel'
+import { ref } from 'vue'
 
 const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
 const data = travelDatas
+const contentSection = ref()
 
-function getImageUrl(name: string, ext: 'jpg' | 'png') {
+const getImageUrl = (name: string, ext: 'jpg' | 'png') => {
   return new URL(`../assets/images/${name}.${ext}`, import.meta.url).href
 }
 
+const scrollTo = (view: any) => {
+  console.log(view)
+  contentSection.value.scrollIntoView({ behavior: 'smooth' })
+}
+
 const handleCarouselChange = (index: any) => {
-  console.log(index, data[index].color)
   currentAccentColorFromCarousel.color = data[index].color
 }
 </script>
@@ -56,12 +62,17 @@ const handleCarouselChange = (index: any) => {
           <TextButton text="Découvrir" :text-color="toto.textColor" :color="toto.color" />
         </div>
         <div class="goDownButton">
-          <IconButton iconName="arrow-down-thin" :icon-color="toto.textColor" :color="toto.color" />
+          <IconButton
+            @click="scrollTo(contentSection)"
+            iconName="arrow-down-thin"
+            :icon-color="toto.textColor"
+            :color="toto.color"
+          />
         </div>
       </v-row>
     </v-carousel-item>
   </v-carousel>
-  <div class="content">
+  <div class="content" ref="contentSection">
     <div class="test">Nos voyages</div>
     <div class="test">Qui sommes nous</div>
   </div>
