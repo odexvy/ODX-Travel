@@ -1,20 +1,11 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-import ODXLogo from './components/ODXLogo.vue'
-import { useCurrentAccentColorFromCarouselStore } from './stores/CurrentAccentColorFromCarousel'
-
-const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
-</script>
-
 <template>
   <div class="appContainer">
-    <header>
+    <header :class="{ scrolled: isScrolled }">
       <ODXLogo
         :svgColor="currentAccentColorFromCarousel.carouselColor.color"
         width="72"
         height="72"
       />
-      <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="54" height="54" /> -->
       <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -25,6 +16,29 @@ const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import { RouterView } from 'vue-router'
+import ODXLogo from './components/ODXLogo.vue'
+import { useCurrentAccentColorFromCarouselStore } from './stores/CurrentAccentColorFromCarousel'
+
+const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
+
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 0
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+</script>
 
 <style scoped>
 .appContainer {
@@ -50,8 +64,12 @@ header {
   left: 0;
   z-index: 1000;
   width: 100vw;
-  /* backdrop-filter: blur(100px); */
   padding: 8px;
+  transition: background-color 0.3s ease;
+}
+
+header.scrolled {
+  background-color: #fff;
 }
 
 nav {
