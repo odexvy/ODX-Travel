@@ -1,15 +1,11 @@
 <template>
-  <div class="appContainer" :class="{ scrolled: isScrolled }">
-    <header :class="{ scrolled: isScrolled }">
+  <div class="appContainer" :class="{ scrolled: isScrolled || isNotHomePage() }">
+    <header :class="{ scrolled: isScrolled || isNotHomePage() }">
       <ODXLogo
         :svgColor="currentAccentColorFromCarousel.carouselColor.color"
         width="72"
         height="72"
       />
-      <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav> -->
       <div class="headerContent">
         <IconBadge iconName="cart" iconColor="#000" notif="1" />
       </div>
@@ -22,19 +18,20 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import ODXLogo from './components/ODXLogo.vue'
 import { useCurrentAccentColorFromCarouselStore } from './stores/CurrentAccentColorFromCarousel'
 import IconBadge from './components/IconBadge.vue'
-import IconButton from './components/IconButton.vue'
 
 const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
-
+const route = useRoute()
 const isScrolled = ref(false)
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 100
 }
+
+const isNotHomePage = () => route.name !== 'home'
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)

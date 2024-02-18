@@ -12,13 +12,19 @@ import { getImageURL } from '../helpers/getImageURL.ts'
 import { useCurrentAccentColorFromCarouselStore } from '../stores/CurrentAccentColorFromCarousel'
 import { ref } from 'vue'
 import TravelsHorizontalSlider from '@/components/TravelsHorizontalSlider.vue'
+import { useRouter } from 'vue-router'
 
 const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
 const travelsOfTheDay = travelsOfTheDayDatas
 const contentSection = ref()
+const router = useRouter()
 
 const scrollTo = () => {
   contentSection.value.scrollIntoView({ behavior: 'smooth' })
+}
+
+const navigateToDetailsPage = (data: any) => {
+  router.push({ name: 'details', query: { ...data } })
 }
 
 const handleCarouselChange = (index: any) => {
@@ -29,7 +35,6 @@ const handleCarouselChange = (index: any) => {
 
 <template>
   <v-carousel
-    ref="carouselSection"
     :show-arrows="false"
     cycle
     hide-delimiters
@@ -70,7 +75,12 @@ const handleCarouselChange = (index: any) => {
           {{ toto.subTitle }}
         </div>
         <div class="discoverButton">
-          <TextButton text="Découvrir" :text-color="toto.textColor" :color="toto.color" />
+          <TextButton
+            text="Découvrir"
+            :text-color="toto.textColor"
+            :color="toto.color"
+            @click="navigateToDetailsPage(toto)"
+          />
         </div>
       </v-row>
     </v-carousel-item>

@@ -31,8 +31,8 @@ const travelDatas = [
     title: 'Antartic',
     subTitle: 'by Foot',
     image: 'trek-antartic',
-    color: '#db1f1f',
-    textColor: '#fff'
+    color: '#db1f5e',
+    textColor: '#ffffff'
   },
   {
     title: 'USA',
