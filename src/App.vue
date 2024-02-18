@@ -1,5 +1,5 @@
 <template>
-  <div class="appContainer">
+  <div class="appContainer" :class="{ scrolled: isScrolled }">
     <header :class="{ scrolled: isScrolled }">
       <ODXLogo
         :svgColor="currentAccentColorFromCarousel.carouselColor.color"
@@ -10,6 +10,10 @@
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav> -->
+      <div class="headerContent">
+        <IconBadge iconName="cart" iconColor="#000" notif="1" />
+        <IconButton iconName="cart" iconColor="#000" />
+      </div>
     </header>
     <div class="contentContainer">
       <RouterView />
@@ -22,13 +26,15 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterView } from 'vue-router'
 import ODXLogo from './components/ODXLogo.vue'
 import { useCurrentAccentColorFromCarouselStore } from './stores/CurrentAccentColorFromCarousel'
+import IconBadge from './components/IconBadge.vue'
+import IconButton from './components/IconButton.vue'
 
 const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
 
 const isScrolled = ref(false)
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 0
+  isScrolled.value = window.scrollY > 100
 }
 
 onMounted(() => {
@@ -45,6 +51,11 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   width: 100vw;
+  padding-top: 0px;
+  transition: padding-top 0.3s ease;
+}
+.appContainer.scrolled {
+  padding-top: 88px;
 }
 
 .contentContainer {
@@ -66,10 +77,18 @@ header {
   width: 100vw;
   padding: 8px;
   transition: background-color 0.3s ease;
+  justify-content: space-between;
 }
 
 header.scrolled {
-  background-color: #fff;
+  background-color: #000;
+}
+
+.headerContent {
+  display: flex;
+  gap: 16px;
+  padding-right: 8px;
+  align-items: center;
 }
 
 nav {

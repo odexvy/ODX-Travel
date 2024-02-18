@@ -105,6 +105,12 @@ const handleCarouselChange = (index: any) => {
     <h1 class="test">Nos voyages</h1>
     <div class="travels">
       <h1 class="test">Trek</h1>
+      <p>
+        Partez à l'aventure et découvrez les merveilles naturelles cachées du monde avec nos voyages
+        en trek. Parcourez des sentiers escarpés, traversez des vallées verdoyantes et atteignez des
+        sommets spectaculaires. Laissez-vous imprégner par la beauté brute de la nature et créez des
+        souvenirs inoubliables en compagnie de guides expérimentés.
+      </p>
       <v-sheet>
         <v-slide-group show-arrows="always" direction="horizontal">
           <v-row justify="center" align="center" class="my-1">
@@ -112,7 +118,7 @@ const handleCarouselChange = (index: any) => {
               <v-card
                 class="mx-2"
                 :image="getImageUrl(data.image, 'jpg')"
-                width="450"
+                :style="{ width: '50vw', maxWidth: '400px', borderRadius: '8px' }"
                 height="188"
                 @click=""
               >
@@ -125,6 +131,13 @@ const handleCarouselChange = (index: any) => {
         </v-slide-group>
       </v-sheet>
       <h1 class="test">Vélo</h1>
+      <p>
+        Pour les amateurs de vélo et d'aventure, nos voyages en trek vélo offrent une expérience
+        unique en combinant la beauté des sentiers de randonnée avec l'excitation du cyclisme.
+        Pédalez à travers des paysages époustouflants, explorez des villages pittoresques et
+        ressentez l'adrénaline monter à mesure que vous gravissez des cols difficiles. Une aventure
+        à couper le souffle pour les amoureux de la nature et du vélo.
+      </p>
       <v-sheet>
         <v-slide-group show-arrows="always" direction="horizontal">
           <v-row justify="center" align="center" class="my-1">
@@ -132,11 +145,11 @@ const handleCarouselChange = (index: any) => {
               <v-card
                 class="mx-2"
                 :image="getImageUrl(data.image, 'jpg')"
-                width="400"
+                :style="{ width: '50vw', maxWidth: '450px', borderRadius: '8px' }"
                 height="188"
                 @click=""
               >
-                <h1 :style="{ color: data.color, paddingLeft: '16px', fontWeight: 'bold' }">
+                <h1 :style="{ color: data.color, paddingLeft: '16px' }">
                   {{ data.title.toUpperCase() }}
                 </h1>
               </v-card>
@@ -145,6 +158,13 @@ const handleCarouselChange = (index: any) => {
         </v-slide-group>
       </v-sheet>
       <h1 class="test">Road trip</h1>
+      <p>
+        Libérez l'aventurier qui sommeille en vous avec nos road trips. Empruntez des routes
+        pittoresques, découvrez des destinations hors des sentiers battus et vivez des expériences
+        authentiques loin des complexes hôteliers. Imprégnez-vous de la culture locale, rencontrez
+        des habitants chaleureux et créez des souvenirs uniques lors de ce voyage en toute
+        simplicité.
+      </p>
       <v-sheet>
         <v-slide-group show-arrows="always" direction="horizontal">
           <v-row justify="center" align="center" class="my-1">
@@ -152,7 +172,7 @@ const handleCarouselChange = (index: any) => {
               <v-card
                 class="mx-2"
                 :image="getImageUrl(data.image, 'jpg')"
-                width="450"
+                :style="{ width: '50vw', maxWidth: '400px', borderRadius: '8px' }"
                 height="188"
                 @click=""
               >
@@ -165,6 +185,14 @@ const handleCarouselChange = (index: any) => {
         </v-slide-group>
       </v-sheet>
       <h1 class="test">Safari photo</h1>
+      <p>
+        Explorez les merveilles naturelles et les paysages époustouflants à travers nos voyages en
+        safari photo. Parcourez des terrains variés, des vastes plaines aux sommets des volcans, en
+        passant par des forêts luxuriantes. Immortalisez la beauté brute de la nature, capturez des
+        panoramas à couper le souffle et saisissez l'essence des lieux de tournage emblématiques.
+        Accompagné par des guides expérimentés, plongez au cœur de la nature sauvage et créez des
+        souvenirs photographiques qui dureront toute une vie.
+      </p>
       <v-sheet>
         <v-slide-group show-arrows="always" direction="horizontal">
           <v-row justify="center" align="center" class="my-1">
@@ -172,7 +200,7 @@ const handleCarouselChange = (index: any) => {
               <v-card
                 class="mx-2"
                 :image="getImageUrl(data.image, 'jpg')"
-                width="400"
+                :style="{ width: '50vw', maxWidth: '450px', borderRadius: '8px' }"
                 height="188"
                 @click=""
               >
@@ -199,7 +227,7 @@ const handleCarouselChange = (index: any) => {
   padding: 24px 8px 8px 8px;
 }
 .travels {
-  padding: 8px 8px 8px 24px;
+  padding: 8px;
 }
 .discoverButton {
   margin-top: 24px;
@@ -208,6 +236,5 @@ const handleCarouselChange = (index: any) => {
   position: absolute;
   bottom: 0;
   margin-bottom: 24px;
-  z-index: 2000;
 }
 </style>
