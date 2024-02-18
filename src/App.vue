@@ -12,7 +12,6 @@
       </nav> -->
       <div class="headerContent">
         <IconBadge iconName="cart" iconColor="#000" notif="1" />
-        <IconButton iconName="cart" iconColor="#000" />
       </div>
     </header>
     <div class="contentContainer">

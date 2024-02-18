@@ -1,7 +1,7 @@
 const travelDatas = [
   {
-    title: 'Harry Potter',
-    subTitle: 'by Photo',
+    title: 'Sur les traces de Harry Potter',
+    subTitle: '',
     image: 'photo-harry-potter',
     color: '#cfdb1f',
     textColor: '#000'

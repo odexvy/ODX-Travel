@@ -45,20 +45,21 @@ const handleCarouselChange = (index: any) => {
       cover
     >
       <v-row
-        class="d-flex fill-height justify-center align-center flex-column"
+        class="d-flex fill-height justify-center align-center flex-column mx-1"
         :style="{ gap: 24 }"
       >
-        <div
+        <h1
           class="text-h1"
           :style="{
             color: toto.color,
             fontWeight: 'bold',
             fontSize: '12vw !important',
-            lineHeight: '12vw !important'
+            lineHeight: '12vw !important',
+            textAlign: 'center'
           }"
         >
           {{ toto.title.toUpperCase() }}
-        </div>
+        </h1>
         <div
           class="text-h2"
           :style="{
@@ -112,13 +113,13 @@ const handleCarouselChange = (index: any) => {
         souvenirs inoubliables en compagnie de guides expérimentés.
       </p>
       <v-sheet>
-        <v-slide-group show-arrows="always" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1">
+        <v-slide-group show-arrows="desktop" direction="horizontal">
+          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
             <v-slide-group-item v-for="data in trekTravalesDatas" :key="data.title">
               <v-card
                 class="mx-2"
                 :image="getImageUrl(data.image, 'jpg')"
-                :style="{ width: '50vw', maxWidth: '400px', borderRadius: '8px' }"
+                :style="{ width: '60vw', maxWidth: '400px', borderRadius: '8px' }"
                 height="188"
                 @click=""
               >
@@ -139,8 +140,8 @@ const handleCarouselChange = (index: any) => {
         à couper le souffle pour les amoureux de la nature et du vélo.
       </p>
       <v-sheet>
-        <v-slide-group show-arrows="always" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1">
+        <v-slide-group show-arrows="desktop" direction="horizontal">
+          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
             <v-slide-group-item v-for="data in vttTravalesDatas" :key="data.title">
               <v-card
                 class="mx-2"
@@ -166,8 +167,8 @@ const handleCarouselChange = (index: any) => {
         simplicité.
       </p>
       <v-sheet>
-        <v-slide-group show-arrows="always" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1">
+        <v-slide-group show-arrows="desktop" direction="horizontal">
+          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
             <v-slide-group-item v-for="data in roadTravalesDatas" :key="data.title">
               <v-card
                 class="mx-2"
@@ -194,8 +195,8 @@ const handleCarouselChange = (index: any) => {
         souvenirs photographiques qui dureront toute une vie.
       </p>
       <v-sheet>
-        <v-slide-group show-arrows="always" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1">
+        <v-slide-group show-arrows="desktop" direction="horizontal">
+          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
             <v-slide-group-item v-for="data in photoTravalesDatas" :key="data.title">
               <v-card
                 class="mx-2"

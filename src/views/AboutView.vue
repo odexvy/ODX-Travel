@@ -9,6 +9,6 @@
 <style>
 .aboutContainer {
   height: 100vh;
-  padding-top: 50px;
+  padding-top: 96px;
 }
 </style>
