@@ -8,16 +8,14 @@ import {
   vttTravalesDatas,
   roadTravalesDatas
 } from '../travelDatas.ts'
+import { getImageURL } from '../helpers/getImageURL.ts'
 import { useCurrentAccentColorFromCarouselStore } from '../stores/CurrentAccentColorFromCarousel'
 import { ref } from 'vue'
+import TravelsHorizontalSlider from '@/components/TravelsHorizontalSlider.vue'
 
 const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
 const travelsOfTheDay = travelsOfTheDayDatas
 const contentSection = ref()
-
-const getImageUrl = (name: string, ext: 'jpg' | 'png') => {
-  return new URL(`../assets/images/${name}.${ext}`, import.meta.url).href
-}
 
 const scrollTo = () => {
   contentSection.value.scrollIntoView({ behavior: 'smooth' })
@@ -41,7 +39,7 @@ const handleCarouselChange = (index: any) => {
     <v-carousel-item
       v-for="(toto, i) in travelsOfTheDay"
       :key="i"
-      :src="getImageUrl(toto.image, 'jpg')"
+      :src="getImageURL(toto.image, 'jpg')"
       cover
     >
       <v-row
@@ -112,25 +110,7 @@ const handleCarouselChange = (index: any) => {
         sommets spectaculaires. Laissez-vous imprégner par la beauté brute de la nature et créez des
         souvenirs inoubliables en compagnie de guides expérimentés.
       </p>
-      <v-sheet>
-        <v-slide-group show-arrows="desktop" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
-            <v-slide-group-item v-for="data in trekTravalesDatas" :key="data.title">
-              <v-card
-                class="mx-2"
-                :image="getImageUrl(data.image, 'jpg')"
-                :style="{ width: '60vw', maxWidth: '400px', borderRadius: '8px' }"
-                height="188"
-                @click=""
-              >
-                <h1 :style="{ color: data.color, paddingLeft: '16px' }">
-                  {{ data.title.toUpperCase() }}
-                </h1>
-              </v-card>
-            </v-slide-group-item>
-          </v-row>
-        </v-slide-group>
-      </v-sheet>
+      <TravelsHorizontalSlider :datas="trekTravalesDatas" />
       <h1 class="test">Vélo</h1>
       <p>
         Pour les amateurs de vélo et d'aventure, nos voyages en trek vélo offrent une expérience
@@ -139,25 +119,7 @@ const handleCarouselChange = (index: any) => {
         ressentez l'adrénaline monter à mesure que vous gravissez des cols difficiles. Une aventure
         à couper le souffle pour les amoureux de la nature et du vélo.
       </p>
-      <v-sheet>
-        <v-slide-group show-arrows="desktop" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
-            <v-slide-group-item v-for="data in vttTravalesDatas" :key="data.title">
-              <v-card
-                class="mx-2"
-                :image="getImageUrl(data.image, 'jpg')"
-                :style="{ width: '50vw', maxWidth: '450px', borderRadius: '8px' }"
-                height="188"
-                @click=""
-              >
-                <h1 :style="{ color: data.color, paddingLeft: '16px' }">
-                  {{ data.title.toUpperCase() }}
-                </h1>
-              </v-card>
-            </v-slide-group-item>
-          </v-row>
-        </v-slide-group>
-      </v-sheet>
+      <TravelsHorizontalSlider :datas="vttTravalesDatas" />
       <h1 class="test">Road trip</h1>
       <p>
         Libérez l'aventurier qui sommeille en vous avec nos road trips. Empruntez des routes
@@ -166,25 +128,7 @@ const handleCarouselChange = (index: any) => {
         des habitants chaleureux et créez des souvenirs uniques lors de ce voyage en toute
         simplicité.
       </p>
-      <v-sheet>
-        <v-slide-group show-arrows="desktop" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
-            <v-slide-group-item v-for="data in roadTravalesDatas" :key="data.title">
-              <v-card
-                class="mx-2"
-                :image="getImageUrl(data.image, 'jpg')"
-                :style="{ width: '50vw', maxWidth: '400px', borderRadius: '8px' }"
-                height="188"
-                @click=""
-              >
-                <h1 :style="{ color: data.color, paddingLeft: '16px' }">
-                  {{ data.title.toUpperCase() }}
-                </h1>
-              </v-card>
-            </v-slide-group-item>
-          </v-row>
-        </v-slide-group>
-      </v-sheet>
+      <TravelsHorizontalSlider :datas="roadTravalesDatas" />
       <h1 class="test">Safari photo</h1>
       <p>
         Explorez les merveilles naturelles et les paysages époustouflants à travers nos voyages en
@@ -194,25 +138,7 @@ const handleCarouselChange = (index: any) => {
         Accompagné par des guides expérimentés, plongez au cœur de la nature sauvage et créez des
         souvenirs photographiques qui dureront toute une vie.
       </p>
-      <v-sheet>
-        <v-slide-group show-arrows="desktop" direction="horizontal">
-          <v-row justify="center" align="center" class="my-1" :style="{ margin: 0 }">
-            <v-slide-group-item v-for="data in photoTravalesDatas" :key="data.title">
-              <v-card
-                class="mx-2"
-                :image="getImageUrl(data.image, 'jpg')"
-                :style="{ width: '50vw', maxWidth: '450px', borderRadius: '8px' }"
-                height="188"
-                @click=""
-              >
-                <h1 :style="{ color: data.color, paddingLeft: '16px' }">
-                  {{ data.title.toUpperCase() }}
-                </h1>
-              </v-card>
-            </v-slide-group-item>
-          </v-row>
-        </v-slide-group>
-      </v-sheet>
+      <TravelsHorizontalSlider :datas="photoTravalesDatas" />
     </div>
   </div>
 </template>
@@ -228,7 +154,10 @@ const handleCarouselChange = (index: any) => {
   padding: 24px 8px 8px 8px;
 }
 .travels {
+  display: flex;
+  flex-direction: column;
   padding: 8px;
+  gap: 16px;
 }
 .discoverButton {
   margin-top: 24px;
