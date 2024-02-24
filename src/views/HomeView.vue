@@ -13,8 +13,10 @@ import { useCurrentAccentColorFromCarouselStore } from '../stores/CurrentAccentC
 import { ref } from 'vue'
 import TravelsHorizontalSlider from '@/components/TravelsHorizontalSlider.vue'
 import { useRouter } from 'vue-router'
+import { useSelectedTravel } from '@/stores/selectedTravel'
 
-const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
+const { carouselColor } = useCurrentAccentColorFromCarouselStore()
+const { setSelectedTravel } = useSelectedTravel()
 const travelsOfTheDay = travelsOfTheDayDatas
 const contentSection = ref()
 const router = useRouter()
@@ -24,12 +26,14 @@ const scrollTo = () => {
 }
 
 const navigateToDetailsPage = (data: any) => {
-  router.push({ name: 'details', query: { ...data } })
+  //fix this any type
+  setSelectedTravel(data)
+  router.push({ name: 'details', query: { id: data.uuid } })
 }
 
 const handleCarouselChange = (index: any) => {
-  currentAccentColorFromCarousel.carouselColor.color = travelsOfTheDay[index].color
-  currentAccentColorFromCarousel.carouselColor.textColor = travelsOfTheDay[index].textColor
+  carouselColor.color = travelsOfTheDay[index].color
+  carouselColor.textColor = travelsOfTheDay[index].textColor
 }
 </script>
 
@@ -89,8 +93,8 @@ const handleCarouselChange = (index: any) => {
     <IconButton
       @click="scrollTo()"
       iconName="arrow-down-thin"
-      :icon-color="currentAccentColorFromCarousel.carouselColor.textColor"
-      :color="currentAccentColorFromCarousel.carouselColor.color"
+      :icon-color="carouselColor.textColor"
+      :color="carouselColor.color"
     />
   </div>
   <div ref="contentSection" class="content">

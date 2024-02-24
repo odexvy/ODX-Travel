@@ -3,6 +3,9 @@ const { svgColor, width, height } = defineProps(['svgColor', 'height', 'width'])
 </script>
 
 <style scoped>
+.pointer:hover {
+  cursor: pointer;
+}
 .cls-1 {
   fill: v-bind(svgColor);
 }
@@ -22,6 +25,7 @@ const { svgColor, width, height } = defineProps(['svgColor', 'height', 'width'])
     viewBox="0 0 315.25 315.75"
     :height="height"
     :width="width"
+    class="pointer"
   >
     <rect class="cls-1" x="17.75" y="18.25" width="297.5" height="297.5" />
     <rect class="cls-2" width="297.5" height="297.5" />

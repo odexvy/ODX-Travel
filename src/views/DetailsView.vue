@@ -1,86 +1,51 @@
 <script setup lang="ts">
 import { getImageURL } from '@/helpers/getImageURL'
 import { isMobile } from '@/helpers/isMobile'
-import { useCurrentAccentColorFromCarouselStore } from '@/stores/CurrentAccentColorFromCarousel'
+import { useSelectedTravel } from '@/stores/selectedTravel'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const currentAccentColorFromCarousel = useCurrentAccentColorFromCarouselStore()
-
-const data = route.query
-
-onMounted(() => {
-  currentAccentColorFromCarousel.carouselColor.color = data.color as string
-})
+const { selectedTravel } = useSelectedTravel()
 </script>
 
 <template>
-  <div
-    :style="{
-      position: 'fixed',
-      top: 0,
-      backgroundImage: 'url(' + getImageURL(data.image as string, 'jpg') + ')',
-      height: '100vh',
-      width: '100vw'
-    }"
-  ></div>
-  <div class="aboutContainer" :style="{ width: isMobile() ? '100vw' : '96vw' }">
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
-    <h1>Vuetify</h1>
+  <div class="mainDetailView">
+    <div class="aboutContainer">
+      <h1>{{ selectedTravel.title }}</h1>
+    </div>
+    <div
+      class="picture"
+      :style="{
+        backgroundImage: 'url(' + getImageURL(selectedTravel.image as string, 'jpg') + ')',
+        display: isMobile() ? 'none' : 'block'
+      }"
+    >
+      <h1
+        :style="{
+          color: selectedTravel.color
+        }"
+      >
+        {{ selectedTravel.gps.latitude }}°N, {{ selectedTravel.gps.longitude }}°
+      </h1>
+    </div>
   </div>
 </template>
 
 <style>
-.aboutContainer {
-  position: absolute;
-  flex-direction: column;
-  top: 0;
-  left: 0;
+.mainDetailView {
   display: flex;
-  justify-content: center;
-  padding-top: 96px;
-  width: 96vw;
+  width: 100vw;
+  min-height: calc(100vh - 88px);
+}
+.aboutContainer {
   background-color: #fff;
+  flex: 1;
+}
+.picture {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 16px 8px;
+  text-align: end;
 }
 </style>

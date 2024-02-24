@@ -2,15 +2,16 @@
 import { useRouter } from 'vue-router'
 import { getImageURL } from '../helpers/getImageURL.ts'
 import { isMobile } from '../helpers/isMobile.ts'
+import { useSelectedTravel } from '@/stores/selectedTravel'
 
 const { datas } = defineProps(['datas'])
+const { setSelectedTravel } = useSelectedTravel()
 const router = useRouter()
 
 const navigateToDetailsPage = (data: any) => {
-  router.push({
-    name: 'details',
-    query: { ...data }
-  })
+  //fix this any type
+  setSelectedTravel(data)
+  router.push({ name: 'details', query: { id: data.uuid } })
 }
 </script>
 
