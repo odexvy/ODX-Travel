@@ -1,36 +1,19 @@
-<template>
-  <div class="appContainer" :class="{ scrolled: isScrolled || isNotHomePage() }">
-    <header :class="{ scrolled: isScrolled || isNotHomePage() }">
-      <ODXLogo
-        :svgColor="carouselColor.color"
-        width="72"
-        height="72"
-        @click="navigateToDetailsPage()"
-      />
-      <div class="headerContent">
-        <IconBadge iconName="cart" iconColor="#000" notif="1" />
-      </div>
-    </header>
-    <div class="contentContainer">
-      <RouterView />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import ODXLogo from './components/ODXLogo.vue'
 import { useCurrentAccentColorFromCarouselStore } from './stores/CurrentAccentColorFromCarousel'
 import IconBadge from './components/IconBadge.vue'
+import { useToPayTravel } from './stores/toPayTravel'
 
 const { carouselColor } = useCurrentAccentColorFromCarouselStore()
+const { nbNotif } = useToPayTravel()
 const route = useRoute()
 const isScrolled = ref(false)
 const router = useRouter()
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 100
+  isScrolled.value = window.scrollY > window.innerHeight - 48
 }
 
 const isNotHomePage = () => route.name !== 'home'
@@ -46,7 +29,34 @@ onUnmounted(() => {
 const navigateToDetailsPage = () => {
   router.push({ name: 'home' })
 }
+const navigateToCartPage = () => {
+  router.push({ name: 'cart' })
+}
 </script>
+
+<template>
+  <div class="appContainer" :class="{ scrolled: isScrolled || isNotHomePage() }">
+    <header :class="{ scrolled: isScrolled || isNotHomePage() }">
+      <ODXLogo
+        :svgColor="carouselColor.color"
+        width="72"
+        height="72"
+        @click="navigateToDetailsPage()"
+      />
+      <div class="headerContent">
+        <IconBadge
+          iconName="cart"
+          iconColor="#000"
+          :notif="nbNotif()"
+          @click="navigateToCartPage()"
+        />
+      </div>
+    </header>
+    <div class="contentContainer">
+      <RouterView />
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .appContainer {

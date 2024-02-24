@@ -193,11 +193,15 @@ const travelDatas = [
   }
 ]
 
+const getRandomNumber = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
 export const travelsOfTheDayDatas = [
-  travelDatas[0],
-  travelDatas[4],
-  travelDatas[8],
-  travelDatas[12]
+  travelDatas[getRandomNumber(0, 3)],
+  travelDatas[getRandomNumber(4, 7)],
+  travelDatas[getRandomNumber(8, 11)],
+  travelDatas[getRandomNumber(12, 15)]
 ]
 
 export const photoTravalesDatas = [travelDatas[0], travelDatas[1], travelDatas[2], travelDatas[3]]

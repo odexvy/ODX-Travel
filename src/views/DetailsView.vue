@@ -1,18 +1,32 @@
 <script setup lang="ts">
+import TextButton from '@/components/TextButton.vue'
 import { getImageURL } from '@/helpers/getImageURL'
 import { isMobile } from '@/helpers/isMobile'
 import { useSelectedTravel } from '@/stores/selectedTravel'
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useToPayTravel } from '@/stores/toPayTravel'
+import { useRouter } from 'vue-router'
 
-const route = useRoute()
+const router = useRouter()
 const { selectedTravel } = useSelectedTravel()
+const { setToPayTravel } = useToPayTravel()
+
+const navigateToCartPage = () => {
+  setToPayTravel(selectedTravel, { cancelInsurance: true, equipmentLoan: true })
+
+  router.push({ name: 'cart' })
+}
 </script>
 
 <template>
   <div class="mainDetailView">
     <div class="aboutContainer">
       <h1>{{ selectedTravel.title }}</h1>
+      <TextButton
+        text="Réserver votre voyage"
+        :text-color="selectedTravel.textColor"
+        :color="selectedTravel.color"
+        @click="navigateToCartPage()"
+      />
     </div>
     <div
       class="picture"
