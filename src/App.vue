@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
-import ODXLogo from './components/ODXLogo.vue'
+import ODXLogo from './components/svg/ODXLogo.vue'
 import { useCurrentAccentColorFromCarouselStore } from './stores/CurrentAccentColorFromCarousel'
 import IconBadge from './components/IconBadge.vue'
 import { useToPayTravel } from './stores/toPayTravel'
@@ -65,6 +65,8 @@ const navigateToCartPage = () => {
   width: 100vw;
   padding-top: 0px;
   transition: padding-top 0.3s ease;
+  background-color: #fff;
+  color: #000;
 }
 .appContainer.scrolled {
   padding-top: 88px;
@@ -99,7 +101,6 @@ header.scrolled {
 .headerContent {
   display: flex;
   gap: 16px;
-  padding-right: 8px;
   align-items: center;
 }
 

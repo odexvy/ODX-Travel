@@ -165,7 +165,7 @@ const handleCarouselChange = (index: any) => {
   flex-direction: column;
   align-items: flex-start;
   max-width: 1240px;
-  padding: 24px 8px 8px 8px;
+  padding: 24px 16px 16px 16px;
 }
 .travels {
   display: flex;
